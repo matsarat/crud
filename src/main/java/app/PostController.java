@@ -1,36 +1,34 @@
 package app;
 
 
-import org.springframework.http.*;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 @RestController
 public class PostController {
 
-    @GetMapping("/")
-    public String elo() {
-        return "ELO";
-    }
-
 
     @GetMapping(path = "/api/posts")
-    public void getPosts() {
+    public List<PostDto> getPosts() {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<PostDto[]> responseEntity = restTemplate.exchange(
+        ResponseEntity<List<PostDto>> responseEntity = restTemplate.exchange(
                 "https://jsonplaceholder.typicode.com/posts",
                 HttpMethod.GET,
                 null,
-                PostDto[].class);
+                new ParameterizedTypeReference<List<PostDto>>() {
+                });
 
-
-        Stream.of(Objects.requireNonNull(responseEntity.getBody())).forEach(System.out::println);
+        return responseEntity.getBody();
     }
 
 
