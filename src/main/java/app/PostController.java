@@ -8,7 +8,7 @@ import java.util.List;
 @RestController
 public class PostController {
 
-    PostRestClient postRestClient;
+    private final PostRestClient postRestClient;
 
     public PostController() {
         this.postRestClient = new PostRestClient();
@@ -21,19 +21,19 @@ public class PostController {
     }
 
 
-    @PostMapping("/api/posts")
+    @PostMapping(path = "/api/posts")
     public PostDto addPost(@RequestBody PostDto postDto) {
 
         return postRestClient.clientAddPost(postDto);
     }
 
-    @PutMapping("/api/posts")
+    @PutMapping(path = "/api/posts")
     public PostDto putPost(@RequestBody PostDto postDto, @RequestParam long id) {
 
         return postRestClient.clientPutPost(postDto, id);
     }
 
-    @DeleteMapping("/api/posts")
+    @DeleteMapping(path = "/api/posts")
     public PostDto deletePost(@RequestParam long id) {
 
         return postRestClient.clientDeletePost(id);

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class PostRestClient {
 
-    RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public PostRestClient() {
         this.restTemplate = new RestTemplate();
