@@ -14,7 +14,6 @@ public class PostController {
         this.postRestClient = new PostRestClient();
     }
 
-
     @GetMapping(path = "/api/posts")
     public List<PostDto> getPosts() {
 
@@ -28,10 +27,10 @@ public class PostController {
         return postRestClient.clientAddPost(postDto);
     }
 
-    @PatchMapping("/api/posts")
-    public PostDto patchPost(@RequestBody PostDto postDto) {
+    @PutMapping("/api/posts")
+    public PostDto putPost(@RequestBody PostDto postDto, @RequestParam long id) {
 
-        return postRestClient.clientPatchPost(postDto);
+        return postRestClient.clientPutPost(postDto, id);
     }
 
     @DeleteMapping("/api/posts")

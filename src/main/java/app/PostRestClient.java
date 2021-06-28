@@ -41,7 +41,7 @@ public class PostRestClient {
     public PostDto clientAddPost(PostDto postDto) {
 
         ResponseEntity<PostDto> responseEntity = restTemplate.exchange(
-                "https://jsonplaceholder.typicode.com/posts",
+                "https://jsonplaceholder.typicode.com/posts/",
                 HttpMethod.POST,
                 createHttpEntity(postDto),
                 PostDto.class);
@@ -50,13 +50,15 @@ public class PostRestClient {
 
     }
 
-    public PostDto clientPatchPost(PostDto postDto) {
+    public PostDto clientPutPost(PostDto postDto, long id) {
 
         ResponseEntity<PostDto> responseEntity = restTemplate.exchange(
-                "https://jsonplaceholder.typicode.com/posts/",
-                HttpMethod.PATCH,
+                "https://jsonplaceholder.typicode.com/posts/{id}",
+                HttpMethod.PUT,
                 createHttpEntity(postDto),
-                PostDto.class);
+                PostDto.class,
+                Map.of("id", id)
+        );
 
         return responseEntity.getBody();
     }
